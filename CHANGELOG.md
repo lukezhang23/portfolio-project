@@ -13,3 +13,9 @@ the following form: YYYY.0M.0D.
 - Designed a `PickleballDoublesScore` component
 - Designed a `DiscGolfScorecard` component
 - Designed a `Playlist` component
+
+## 2024.10.11
+
+### Added
+
+- Designed a proof of concept for `DiscGolfScorecard` component which included an internal class of `DiscGolfHole`.
