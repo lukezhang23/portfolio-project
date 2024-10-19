@@ -13,3 +13,13 @@ the following form: YYYY.0M.0D.
 - Designed a `PickleballDoublesScore` component
 - Designed a `DiscGolfScorecard` component
 - Designed a `Playlist` component
+
+## 2024.10.19
+
+### Added
+
+- Designed kernel and enhanced interfaces for `DiscGolfScorecard` component
+
+### Updated
+
+- Changed design to get rid of currentHole method
