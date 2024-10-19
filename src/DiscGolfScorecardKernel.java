@@ -22,6 +22,14 @@ public interface DiscGolfScorecardKernel extends Standard<DiscGolfScorecard>,
         DiscGolfScorecard.Hole nextHole();
 
         /**
+         * Returns the number of the current hole of {@code this}.
+         *
+         * @return the number of the current hole of {@code this}
+         * @ensures {@code <currentHole> is the current hole of this}
+         */
+        int currentHole();
+
+        /**
          * Reports length of {@code this}.
          *
          * @return the number of holes in {@code this}
