@@ -58,6 +58,19 @@ public interface DiscGolfScorecard extends DiscGolfScorecardKernel {
     }
 
     /**
+     * Returns the hole at number {@code num} of {@code this}.
+     *
+     * @param num
+     *            the number of the hole to return
+     * @return the hole with that number
+     * @aliases reference returned by {@code hole}
+     * @requires {@code 1 <= num and num <= |this|}
+     * @ensures {@code <hole> = the hole with number num}
+     *
+     */
+    Hole hole(int num);
+
+    /**
      * Reports the total par in {@code this}.
      *
      * @return the total par in {@code this}
