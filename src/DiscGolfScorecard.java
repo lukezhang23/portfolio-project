@@ -14,46 +14,61 @@ public interface DiscGolfScorecard extends DiscGolfScorecardKernel {
      */
     interface Hole {
         /**
-         * Replaces the par of {@code this} with {@code par} and returns the old
-         * par.
+         * Returns the par of {@code this}.
+         *
+         * @return the par of {@code this}.
+         * @ensures {@code <par> is the par of this}
+         */
+        int par();
+
+        /**
+         * Returns the distance of {@code this}.
+         *
+         * @return the distance of {@code this}.
+         * @ensures {@code <distance> is the par of this}
+         */
+        int distance();
+
+        /**
+         * Returns the strokes of {@code this}.
+         *
+         * @return the strokes of {@code this}.
+         * @ensures {@code <strokes> is the strokes of this}
+         */
+        int strokes();
+
+        /**
+         * Replaces the par of {@code this} with {@code par}.
          *
          * @param par
          *            the par replacing the old one
-         * @return the old par
          * @updates this
          * @requires {@code par >= 0}
-         * @ensures {@code <changePar> = previous value of par
-         *  and this has specified par as new par}
+         * @ensures {@code this has specified par as new par}
          */
-        int changePar(int par);
+        void changePar(int par);
 
         /**
-         * Replaces the distance of {@code this} with {@code distance} and
-         * returns the old distance.
+         * Replaces the distance of {@code this} with {@code distance}.
          *
          * @param distance
          *            the distance replacing the old one
-         * @return the old distane
          * @updates this
          * @requires {@code distance >= 0}
-         * @ensures {@code <changeDistance> = previous value of eistance
-         *  and this has specified distance as new distance}
+         * @ensures {@code this has specified distannce as new distance}
          */
-        int changeDistance(int distance);
+        void changeDistance(int distance);
 
         /**
-         * Replaces the strokes of {@code this} with {@code strokes} and returns
-         * the old strokes.
+         * Replaces the strokes of {@code this} with {@code strokes}.
          *
          * @param strokes
          *            the strokes replacing the old one
-         * @return the old strokes
          * @updates this
          * @requires {@code strokes >= 0}
-         * @ensures {@code <changeStrokes> = previous value of strokes
-         *  and this has specified strokes as new strokes}
+         * @ensures {@code this has specified strokes as new strokes}
          */
-        int changeStrokes(int strokes);
+        void changeStrokes(int strokes);
 
     }
 
