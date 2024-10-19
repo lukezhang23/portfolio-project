@@ -22,4 +22,4 @@ the following form: YYYY.0M.0D.
 
 ### Updated
 
-- Changed design to get rid of currentHole method
+- Changed design to make currentHole return the hole number instead of a hole object.
