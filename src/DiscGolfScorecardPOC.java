@@ -4,7 +4,7 @@ import components.map.Map2;
 /**
  * @author Luke Zhang
  */
-public class DiscGolfScorecard {
+public class DiscGolfScorecardPOC {
 
     /*
      * Private members --------------------------------------------------------
@@ -143,7 +143,7 @@ public class DiscGolfScorecard {
     /**
      * No-argument constructor.
      */
-    public DiscGolfScorecard() {
+    public DiscGolfScorecardPOC() {
         this.createNewRep(DEFAULT_SCORECARD_SIZE, DEFAULT_STARTING_HOLE);
     }
 
@@ -155,7 +155,7 @@ public class DiscGolfScorecard {
      * @requires scorecardSize > 0
      * @ensures this = [empty scorecard with size scorecardSize]
      */
-    public DiscGolfScorecard(int scorecardSize) {
+    public DiscGolfScorecardPOC(int scorecardSize) {
         this.createNewRep(scorecardSize, DEFAULT_STARTING_HOLE);
     }
 
@@ -358,7 +358,7 @@ public class DiscGolfScorecard {
      *            the command line arguments
      */
     public static void main(String[] args) {
-        DiscGolfScorecard balgriffin = new DiscGolfScorecard(9);
+        DiscGolfScorecardPOC balgriffin = new DiscGolfScorecardPOC(9);
         balgriffin.currentHole().changeStrokes(2);
         balgriffin.nextHole().changeStrokes(2);
         balgriffin.nextHole().changeStrokes(3);
