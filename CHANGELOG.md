@@ -6,14 +6,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## 2024.09.14
-
-### Added
-
-- Designed a `PickleballDoublesScore` component
-- Designed a `DiscGolfScorecard` component
-- Designed a `Playlist` component
-
 ## 2024.10.19
 
 ### Added
@@ -23,3 +15,17 @@ the following form: YYYY.0M.0D.
 ### Updated
 
 - Changed design to make currentHole return the hole number instead of a hole object.
+
+## 2024.10.11
+
+### Added
+
+- Designed a proof of concept for `DiscGolfScorecard` component which included an internal class of `DiscGolfHole`.
+
+## 2024.09.14
+
+### Added
+
+- Designed a `PickleballDoublesScore` component
+- Designed a `DiscGolfScorecard` component
+- Designed a `Playlist` component
