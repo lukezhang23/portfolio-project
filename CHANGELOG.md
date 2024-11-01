@@ -15,6 +15,7 @@ the following form: YYYY.0M.0D.
 ### Updated
 
 - Changed design to include additional methods for DiscGolfScorecard.Hole
+- Changed changelog to be in reverse chronological order
 
 ## 2024.09.14
 
