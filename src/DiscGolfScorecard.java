@@ -17,7 +17,7 @@ public interface DiscGolfScorecard extends DiscGolfScorecardKernel {
          * Returns the par of {@code this}.
          *
          * @return the par of {@code this}.
-         * @ensures {@code <par> is the par of this}
+         * @ensures {@code <par> is the par of this and <par> >= 0}
          */
         int par();
 
@@ -25,7 +25,7 @@ public interface DiscGolfScorecard extends DiscGolfScorecardKernel {
          * Returns the distance of {@code this}.
          *
          * @return the distance of {@code this}.
-         * @ensures {@code <distance> is the par of this}
+         * @ensures {@code <distance> is the par of this and <distance> >= 0}
          */
         int distance();
 
@@ -33,7 +33,7 @@ public interface DiscGolfScorecard extends DiscGolfScorecardKernel {
          * Returns the strokes of {@code this}.
          *
          * @return the strokes of {@code this}.
-         * @ensures {@code <strokes> is the strokes of this}
+         * @ensures {@code <strokes> is the strokes of this and <strokes> >= 0}
          */
         int strokes();
 
