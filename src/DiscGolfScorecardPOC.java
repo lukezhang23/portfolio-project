@@ -2,6 +2,8 @@ import components.map.Map;
 import components.map.Map2;
 
 /**
+ * DiscGolfScorecard Proof Of Concept.
+ *
  * @author Luke Zhang
  */
 public class DiscGolfScorecardPOC {
