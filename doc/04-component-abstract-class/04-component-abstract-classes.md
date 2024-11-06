@@ -2,7 +2,7 @@
 
 - **Name**: Luke Zhang
 - **Dot Number**: Zhang.13813
-- **Due Date**: 10/31 @ 12:40 PM
+- **Due Date**: 11/1 @ 12:40 PM
 
 ## Assignment Overview
 

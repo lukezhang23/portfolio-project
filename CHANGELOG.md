@@ -17,6 +17,22 @@ the following form: YYYY.0M.0D.
 - Changed design to include additional methods for DiscGolfScorecard.Hole
 - Changed changelog to be in reverse chronological order
 
+## 2024.10.19
+
+### Added
+
+- Designed kernel and enhanced interfaces for `DiscGolfScorecard` component
+
+### Updated
+
+- Changed design to make currentHole return the hole number instead of a hole object.
+
+## 2024.10.11
+
+### Added
+
+- Designed a proof of concept for `DiscGolfScorecard` component which included an internal class of `DiscGolfHole`.
+
 ## 2024.09.14
 
 ### Added
