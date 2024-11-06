@@ -31,7 +31,6 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
     public boolean equals(Object obj) {
-        // FINISH THIS
         boolean result = true;
         if (this != obj) {
             if (obj == null || this.getClass() != obj.getClass()) {
