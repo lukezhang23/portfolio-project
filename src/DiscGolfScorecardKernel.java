@@ -10,26 +10,54 @@ import components.standard.Standard;
  * }
  * @iterator ~this.seen * ~this.unseen = this
  */
-public interface DiscGolfScorecardKernel extends Standard<DiscGolfScorecard>,
-                Iterable<DiscGolfScorecard.Hole> {
+public interface DiscGolfScorecardKernel
+                extends Standard<DiscGolfScorecard>, Iterable<Hole> {
         /**
-         * Returns the hole at the front of {@code this}.
+         * Returns the current hole of {@code this}.
          *
-         * @return the next hole of {@code this}
-         * @aliases reference returned by {@code nextHole}
-         * @updates this
+         * @return the current hole of {@code this}
          * @ensures this advances to the next hole and
          *          {@code <nextHole> is the next hole of this},
          */
-        DiscGolfScorecard.Hole nextHole();
+        Hole currentHole();
 
         /**
-         * Returns the number of the current hole of {@code this}.
+         * Replaces the current hole of {@code this}.
          *
-         * @return the number of the current hole of {@code this}
-         * @ensures {@code <currentHole> is the current hole of this}
+         * @param replacement
+         *                the hole that will replace the current hole of
+         *                {@code this}
+         * @updates this
+         * @ensures the current hole of {@code this} is {@code replacement} and
+         *          the rest of {@code this} remains the same
          */
-        int currentHole();
+        void replaceCurrentHole(Hole replacement);
+
+        /**
+         * Advances {@code this} to the next hole.
+         *
+         * @updates this
+         * @ensures if current hole number of {@code this} is length of
+         *          {@code this}: sets current hole of {@code this} to 1, else:
+         *          increments current hole of {@code this}
+         */
+        void advanceHole();
+
+        /**
+         * Returns the current hole number of {@code this}.
+         *
+         * @return the current hole number of {@code this}
+         * @ensures {@code <currentHoleNumber> is the current hole number of this}
+         */
+        int currentHoleNumber();
+
+        /**
+         * Returns the starting hole number of {@code this}.
+         *
+         * @return the starting hole number of {@code this}
+         * @ensures {@code <startingHoleNumber> is the starting hole number of this}
+         */
+        int startingHoleNumber();
 
         /**
          * Reports length of {@code this}.

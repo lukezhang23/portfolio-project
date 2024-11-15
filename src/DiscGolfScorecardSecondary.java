@@ -13,46 +13,67 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder("{");
-        for (int i = 0; i < this.length(); i++) {
-            DiscGolfScorecard.Hole hole = this.nextHole();
-            result.append("(");
-            result.append(Integer.toString(hole.par()));
-            result.append(", ");
-            result.append(Integer.toString(hole.distance()));
-            result.append(", ");
-            result.append(Integer.toString(hole.strokes()));
-            result.append(")");
+        int currentHoleNum = this.currentHoleNumber();
+        //Printing string from hole 1, so shift currentHoleNumber to 1
+        while (this.currentHoleNumber() != 1) {
+            this.advanceHole();
         }
-        result.append("}");
+        StringBuilder result = new StringBuilder("{");
+        result.append("Current Hole: ");
+        result.append(this.currentHoleNumber());
+        result.append(", Starting Hole: ");
+        result.append(this.startingHoleNumber());
+        result.append(", [");
+        for (int i = 0; i < this.length(); i++) {
+            Hole hole = this.currentHole();
+            result.append("(");
+            result.append(hole.par());
+            result.append(", ");
+            result.append(hole.distance());
+            result.append(", ");
+            result.append(hole.strokes());
+            result.append(")");
+            this.advanceHole();
+        }
+        result.append("]}");
+        //Restore currentHoleNumber to original value
+        while (this.currentHoleNumber() != currentHoleNum) {
+            this.advanceHole();
+        }
         return result.toString();
     }
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
     public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof DiscGolfScorecard)) {
+            return false;
+        }
+        DiscGolfScorecard scorecard = (DiscGolfScorecard) obj;
+        if (this.length() != scorecard.length()
+                || this.currentHoleNumber() != scorecard.currentHoleNumber()
+                || this.startingHoleNumber() != scorecard
+                        .startingHoleNumber()) {
+            return false;
+        }
         boolean result = true;
-        if (this != obj) {
-            if (obj == null || this.getClass() != obj.getClass()) {
+        for (int i = 0; i < this.length(); i++) {
+            if (result && (this.currentHole().par() != scorecard.currentHole()
+                    .par()
+                    || this.currentHole().distance() != scorecard.currentHole()
+                            .distance()
+                    || this.currentHole().strokes() != scorecard.currentHole()
+                            .distance())) {
+                //Can't return immediately because the scorecard needs to be restored
                 result = false;
-            } else {
-                DiscGolfScorecard scorecard = (DiscGolfScorecard) obj;
-                //Checking equality of each hole in scorecard
-                if (this.length() == scorecard.length()) {
-                    int i = 0;
-                    while (result && i < this.length()) {
-                        result = this.nextHole().par() == scorecard.nextHole()
-                                .distance()
-                                && this.nextHole().distance() == scorecard
-                                        .nextHole().distance()
-                                && this.nextHole().strokes() == scorecard
-                                        .nextHole().strokes();
-                        i++;
-                    }
-                } else {
-                    result = false;
-                }
             }
+            this.advanceHole();
         }
         return result;
     }
@@ -60,12 +81,8 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
     public int hashCode() {
-        int hash = this.length();
-        for (int i = 0; i < this.length(); i++) {
-            hash = hash + this.nextHole().par() + this.nextHole().distance()
-                    + this.nextHole().strokes();
-        }
-        return hash;
+        return 31 * (this.currentHoleNumber() + this.startingHoleNumber()
+                + this.length()) + this.currentHole().hashCode();
     }
 
     /*
@@ -75,16 +92,36 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
     public Hole hole(int num) {
-        boolean found = false;
-        Hole result = this.nextHole();
-        while (!found) {
-            Hole hole = this.nextHole();
-            if (this.currentHole() == num) {
-                result = hole;
-                found = true;
-            }
+        assert 1 <= num && num <= this
+                .length() : "Violation of [1 <= num and num <= |this|]";
+        int currentHoleNumber = this.currentHoleNumber();
+        while (this.currentHoleNumber() != num) {
+            this.advanceHole();
+        }
+        Hole result = this.currentHole();
+        //Original currentHoleNumber needs to be restored
+        while (this.currentHoleNumber() != currentHoleNumber) {
+            this.advanceHole();
         }
         return result;
+    }
+
+    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
+    @Override
+    public void advanceHole(int num) {
+        assert 1 <= num && num <= this
+                .length() : "Violation of [1 <= num and num <= |this|]";
+        while (this.currentHoleNumber() != num) {
+            this.advanceHole();
+        }
+    }
+
+    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
+    @Override
+    public void retreatHole() {
+        for (int i = 0; i < this.length() - 1; i++) {
+            this.advanceHole();
+        }
     }
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
@@ -92,8 +129,32 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
     public int totalPar() {
         int result = 0;
         for (int i = 0; i < this.length(); i++) {
-            DiscGolfScorecard.Hole hole = this.nextHole();
-            result += hole.par();
+            result += this.currentHole().par();
+            this.advanceHole();
+        }
+        return result;
+    }
+
+    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
+    @Override
+    public int totalPar(int num) {
+        assert 1 <= num && num <= this
+                .length() : "Violation of [1 <= num and num <= |this|]";
+        int currentHoleNumber = this.currentHoleNumber();
+        //Start counting from startingHoleNumber
+        while (this.currentHoleNumber() != this.startingHoleNumber()) {
+            this.advanceHole();
+        }
+        //Summing happens here
+        int stopHole = (num + 1) % this.length();
+        int result = 0;
+        while (this.currentHoleNumber() != stopHole) {
+            result += this.currentHole().par();
+            this.advanceHole();
+        }
+        //Restore the currentHoleNumber to original vlaue
+        while (this.currentHoleNumber() != currentHoleNumber) {
+            this.advanceHole();
         }
         return result;
     }
@@ -103,8 +164,32 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
     public int totalDistance() {
         int result = 0;
         for (int i = 0; i < this.length(); i++) {
-            DiscGolfScorecard.Hole hole = this.nextHole();
-            result += hole.distance();
+            result += this.currentHole().distance();
+            this.advanceHole();
+        }
+        return result;
+    }
+
+    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
+    @Override
+    public int totalDistance(int num) {
+        assert 1 <= num && num <= this
+                .length() : "Violation of [1 <= num and num <= |this|]";
+        int currentHoleNumber = this.currentHoleNumber();
+        //Start counting from startingHoleNumber
+        while (this.currentHoleNumber() != this.startingHoleNumber()) {
+            this.advanceHole();
+        }
+        //Summing happens here
+        int stopHole = (num + 1) % this.length();
+        int result = 0;
+        while (this.currentHoleNumber() != stopHole) {
+            result += this.currentHole().distance();
+            this.advanceHole();
+        }
+        //Restore the currentHoleNumber to original vlaue
+        while (this.currentHoleNumber() != currentHoleNumber) {
+            this.advanceHole();
         }
         return result;
     }
@@ -114,8 +199,32 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
     public int totalStrokes() {
         int result = 0;
         for (int i = 0; i < this.length(); i++) {
-            DiscGolfScorecard.Hole hole = this.nextHole();
-            result += hole.strokes();
+            result += this.currentHole().strokes();
+            this.advanceHole();
+        }
+        return result;
+    }
+
+    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
+    @Override
+    public int totalStrokes(int num) {
+        assert 1 <= num && num <= this
+                .length() : "Violation of [1 <= num and num <= |this|]";
+        int currentHoleNumber = this.currentHoleNumber();
+        //Start counting from startingHoleNumber
+        while (this.currentHoleNumber() != this.startingHoleNumber()) {
+            this.advanceHole();
+        }
+        //Summing happens here
+        int stopHole = (num + 1) % this.length();
+        int result = 0;
+        while (this.currentHoleNumber() != stopHole) {
+            result += this.currentHole().strokes();
+            this.advanceHole();
+        }
+        //Restore the currentHoleNumber to original vlaue
+        while (this.currentHoleNumber() != currentHoleNumber) {
+            this.advanceHole();
         }
         return result;
     }
@@ -125,8 +234,32 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
     public int totalScore() {
         int result = 0;
         for (int i = 0; i < this.length(); i++) {
-            DiscGolfScorecard.Hole hole = this.nextHole();
-            result += hole.strokes() - hole.par();
+            result += this.currentHole().strokes() - this.currentHole().par();
+            this.advanceHole();
+        }
+        return result;
+    }
+
+    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
+    @Override
+    public int totalScore(int num) {
+        assert 1 <= num && num <= this
+                .length() : "Violation of [1 <= num and num <= |this|]";
+        int currentHoleNumber = this.currentHoleNumber();
+        //Start counting from startingHoleNumber
+        while (this.currentHoleNumber() != this.startingHoleNumber()) {
+            this.advanceHole();
+        }
+        //Summing happens here
+        int stopHole = (num + 1) % this.length();
+        int result = 0;
+        while (this.currentHoleNumber() != stopHole) {
+            result += this.currentHole().strokes() - this.currentHole().par();
+            this.advanceHole();
+        }
+        //Restore the currentHoleNumber to original vlaue
+        while (this.currentHoleNumber() != currentHoleNumber) {
+            this.advanceHole();
         }
         return result;
     }
@@ -136,9 +269,36 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
     public int holesPlayed() {
         int result = 0;
         for (int i = 0; i < this.length(); i++) {
-            DiscGolfScorecard.Hole hole = this.nextHole();
-            if (hole.strokes() > 0) {
+            if (this.currentHole().strokes() > 0) {
                 result++;
+            }
+            this.advanceHole();
+        }
+        return result;
+    }
+
+    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDEN
+    @Override
+    public int furthestHolePlayed() {
+        boolean found = false;
+        int currentHoleNumber = this.currentHoleNumber();
+        int i = 0;
+        while (!found && i < this.length()) {
+            //Calling abstract method due to simplicity
+            this.retreatHole();
+            Hole hole = this.currentHole();
+            if (hole.strokes() > 0) {
+                found = true;
+            }
+            i++;
+        }
+        int result = this.currentHoleNumber();
+        if (this.currentHoleNumber() == currentHoleNumber) {
+            result = 0;
+        } else {
+            //Restore the currentHoleNumber to original value
+            while (this.currentHoleNumber() != currentHoleNumber) {
+                this.advanceHole();
             }
         }
         return result;
