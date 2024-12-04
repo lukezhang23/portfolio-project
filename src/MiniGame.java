@@ -1,5 +1,8 @@
 import java.util.Random;
 
+import components.discgolfscorecard.DiscGolfScorecard;
+import components.discgolfscorecard.DiscGolfScorecard1;
+import components.discgolfscorecard.Hole;
 import components.simplereader.SimpleReader;
 import components.simplereader.SimpleReader1L;
 import components.simplewriter.SimpleWriter;
@@ -19,7 +22,7 @@ public final class MiniGame {
     }
 
     /**
-     * Mini disc golf game
+     * Mini disc golf game.
      *
      * @param args
      *            command-line arguments (not used)
@@ -29,7 +32,8 @@ public final class MiniGame {
         String[] goodmessages = { "Good job!", "Nice job!", "Great job!",
                 "You're on a roll!", "You're doing great!", "Nice!",
                 "You're doing great!", "Practice does make perfect!",
-                "Paul Mcbeth is getting nervous, the incoming competition is getting fierce!",
+                "Paul Mcbeth is getting nervous,"
+                        + "the incoming competition is getting fierce!",
                 "Way to be an overachiever!" };
 
         String[] badmessages = { "It's alright, we've all had our bad holes.",
@@ -76,7 +80,7 @@ public final class MiniGame {
                 out.println(badmessages[random.nextInt(badmessages.length)]);
             }
             scorecard.replaceCurrentHole(
-                    new Hole(hole.par(), hole.strokes(), score));
+                    new Hole(hole.par(), hole.distance(), score));
             out.println("Total Score: "
                     + scorecard.totalScore(scorecard.currentHoleNumber()));
             scorecard.advanceHole();

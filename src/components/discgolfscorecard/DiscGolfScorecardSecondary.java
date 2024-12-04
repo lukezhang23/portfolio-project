@@ -1,3 +1,5 @@
+package components.discgolfscorecard;
+
 /**
  * Layered implementations of secondary methods for {@code DiscGolfScorecard}.
  */
@@ -64,16 +66,13 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
         }
         boolean result = true;
         for (int i = 0; i < this.length(); i++) {
-            if (result && (this.currentHole().par() != scorecard.currentHole()
-                    .par()
-                    || this.currentHole().distance() != scorecard.currentHole()
-                            .distance()
-                    || this.currentHole().strokes() != scorecard.currentHole()
-                            .distance())) {
+            if (result
+                    && (!this.currentHole().equals(scorecard.currentHole()))) {
                 //Can't return immediately because the scorecard needs to be restored
                 result = false;
             }
             this.advanceHole();
+            scorecard.advanceHole();
         }
         return result;
     }
@@ -146,11 +145,15 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
             this.advanceHole();
         }
         //Summing happens here
-        int stopHole = (num + 1) % this.length();
         int result = 0;
-        while (this.currentHoleNumber() != stopHole) {
-            result += this.currentHole().par();
-            this.advanceHole();
+        if (this.length() == 1) {
+            result = this.currentHole().par();
+        } else {
+            int stopHole = (num + 1) % this.length();
+            while (this.currentHoleNumber() != stopHole) {
+                result += this.currentHole().par();
+                this.advanceHole();
+            }
         }
         //Restore the currentHoleNumber to original vlaue
         while (this.currentHoleNumber() != currentHoleNumber) {
@@ -181,11 +184,15 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
             this.advanceHole();
         }
         //Summing happens here
-        int stopHole = (num + 1) % this.length();
         int result = 0;
-        while (this.currentHoleNumber() != stopHole) {
-            result += this.currentHole().distance();
-            this.advanceHole();
+        if (this.length() == 1) {
+            result = this.currentHole().distance();
+        } else {
+            int stopHole = (num + 1) % this.length();
+            while (this.currentHoleNumber() != stopHole) {
+                result += this.currentHole().distance();
+                this.advanceHole();
+            }
         }
         //Restore the currentHoleNumber to original vlaue
         while (this.currentHoleNumber() != currentHoleNumber) {
@@ -216,11 +223,15 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
             this.advanceHole();
         }
         //Summing happens here
-        int stopHole = (num + 1) % this.length();
         int result = 0;
-        while (this.currentHoleNumber() != stopHole) {
-            result += this.currentHole().strokes();
-            this.advanceHole();
+        if (this.length() == 1) {
+            result = this.currentHole().strokes();
+        } else {
+            int stopHole = (num + 1) % this.length();
+            while (this.currentHoleNumber() != stopHole) {
+                result += this.currentHole().strokes();
+                this.advanceHole();
+            }
         }
         //Restore the currentHoleNumber to original vlaue
         while (this.currentHoleNumber() != currentHoleNumber) {
@@ -251,10 +262,13 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
             this.advanceHole();
         }
         //Summing happens here
-        int stopHole = (num + 1) % this.length();
         int result = 0;
-        while (this.currentHoleNumber() != stopHole) {
+        boolean calculationComplete = false;
+        while (!calculationComplete) {
             result += this.currentHole().strokes() - this.currentHole().par();
+            if (this.currentHoleNumber() == num) {
+                calculationComplete = true;
+            }
             this.advanceHole();
         }
         //Restore the currentHoleNumber to original vlaue
@@ -277,7 +291,7 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
         return result;
     }
 
-    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDEN
+    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
     public int furthestHolePlayed() {
         boolean found = false;
@@ -293,7 +307,9 @@ public abstract class DiscGolfScorecardSecondary implements DiscGolfScorecard {
             i++;
         }
         int result = this.currentHoleNumber();
-        if (this.currentHoleNumber() == currentHoleNumber) {
+        //Account for nothing being found
+        if (this.currentHoleNumber() == currentHoleNumber
+                && this.currentHole().strokes() <= 0) {
             result = 0;
         } else {
             //Restore the currentHoleNumber to original value

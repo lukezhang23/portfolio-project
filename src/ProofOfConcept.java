@@ -6,7 +6,7 @@ import components.map.Map2;
  *
  * @author Luke Zhang
  */
-public class DiscGolfScorecardPOC {
+public class ProofOfConcept {
 
     /*
      * Private members --------------------------------------------------------
@@ -145,7 +145,7 @@ public class DiscGolfScorecardPOC {
     /**
      * No-argument constructor.
      */
-    public DiscGolfScorecardPOC() {
+    public ProofOfConcept() {
         this.createNewRep(DEFAULT_SCORECARD_SIZE, DEFAULT_STARTING_HOLE);
     }
 
@@ -157,7 +157,7 @@ public class DiscGolfScorecardPOC {
      * @requires scorecardSize > 0
      * @ensures this = [empty scorecard with size scorecardSize]
      */
-    public DiscGolfScorecardPOC(int scorecardSize) {
+    public ProofOfConcept(int scorecardSize) {
         this.createNewRep(scorecardSize, DEFAULT_STARTING_HOLE);
     }
 
@@ -360,7 +360,7 @@ public class DiscGolfScorecardPOC {
      *            the command line arguments
      */
     public static void main(String[] args) {
-        DiscGolfScorecardPOC balgriffin = new DiscGolfScorecardPOC(9);
+        ProofOfConcept balgriffin = new ProofOfConcept(9);
         balgriffin.currentHole().changeStrokes(2);
         balgriffin.nextHole().changeStrokes(2);
         balgriffin.nextHole().changeStrokes(3);

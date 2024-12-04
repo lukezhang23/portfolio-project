@@ -1,5 +1,8 @@
 import java.util.Random;
 
+import components.discgolfscorecard.DiscGolfScorecard;
+import components.discgolfscorecard.DiscGolfScorecard1;
+import components.discgolfscorecard.Hole;
 import components.simplereader.SimpleReader;
 import components.simplereader.SimpleReader1L;
 import components.simplewriter.SimpleWriter;
