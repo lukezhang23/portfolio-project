@@ -1,17 +1,59 @@
+package components.discgolfscorecard;
+
 import components.standard.Standard;
 
 /**
  * DiscGolfScorecard kernel component with primary methods. (Note: by
  * package-wide convention, all references are non-null.)
  *
- * @initally {@code ():
+ * @initally <pre>
+ * ():
  *  ensures
- *  this = <>
- * }
+ *   this is a scorecard with only DEFAULT_SCORECARD_LENGTH default holes and
+ *   with starting hole DEFAULT_STARTING_HOLE
+ * (int scorecardLength):
+ *  requires
+ *   scorecardLength > 0
+ *  ensures
+ *   this is a scorecard with only scorecardLength default holes and with
+ *   starting hole DEFAULT_STARTING_HOLE
+ * (int scorecardLength, int startingHole):
+ *  requires
+ *   1 <= startingHole <= scorecardLength
+ *  ensures
+ *   this is a scorecard with only scorecardLength default holes and with
+ *   starting hole startingHole
+ * </pre>
  * @iterator ~this.seen * ~this.unseen = this
  */
 public interface DiscGolfScorecardKernel
                 extends Standard<DiscGolfScorecard>, Iterable<Hole> {
+
+        /**
+         * Default length of scorecard, with value 18.
+         */
+        int DEFAULT_SCORECARD_LENGTH = 18;
+
+        /**
+         * Default starting hole, with value 1.
+         */
+        int DEFAULT_STARTING_HOLE = 1;
+
+        /**
+         * Default par of a hole, with value 3.
+         */
+        int DEFAULT_PAR = 3;
+
+        /**
+         * Default distance of a hole, with value 0.
+         */
+        int DEFAULT_DISTANCE = 0;
+
+        /**
+         * Default stroke of a hole, with value 0.
+         */
+        int DEFAULT_STROKES = 0;
+
         /**
          * Returns the current hole of {@code this}.
          *

@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
+## 2024.12.4
+
+### Added
+
+- Designed test suite for DiscGolfScorecard component
+- Designed a sample HTML generator and sample game for DiscGolfScorecard component
+
+### Updated
+
+- Moved default constants to interface
+- Simplified constructors
+- Polished directory structure
+- Fixed bugs revealed by testing
+
 ## 2024.11.15
 
 ### Added

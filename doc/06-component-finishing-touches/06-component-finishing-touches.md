@@ -1,8 +1,8 @@
 # Portfolio Part 6: Finishing Touches
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) and delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) and delete this comment -->
-- **Due Date**: <!-- TODO: fill out with due date and time (e.g., 10/17 @ 3:10 PM EST) and delete this comment -->
+- **Name**: Luke Zhang
+- **Dot Number**: Zhang.13813
+- **Due Date**: 12/4 @ 11:59 PM
 
 ## Assignment Overview
 
@@ -49,8 +49,6 @@ Many of these additional techniques are somewhat out of the scope of this
 course, but just knowing about them could set you up for long term success.
 
 ## Assignment Checklist
-
-<!-- TODO: browse the checklist then delete this comment -->
 
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
@@ -131,8 +129,6 @@ merges, you will need to pull the changes from main into your current branch
 to see them. If you don't like this workflow, you may try following the
 rebase strategies described [here](https://stackoverflow.com/questions/35790561/working-while-waiting-for-pending-pr)
 and [here](https://stackoverflow.com/questions/18021888/continue-working-on-a-git-branch-after-making-a-pull-request).
-
-<!-- TODO: make a new branch from main then delete this comment -->
 
 ## Assignment Tasks
 
@@ -298,18 +294,18 @@ Take some time to fill them out honestly.
 > complete the portfolio project, how much better (or worse) do you think you
 > understand software development and why?
 
-<!-- TODO: discuss -->
+I think I understand software development better now because I had to go through the whole process of brainstorming a component, creating a proof of concept, and building the seperate parts of the component. This seems similar to a process that would occur in a real world workplace so this made me understand software development. Also, the whole process showed me how I could create my own project if I wanted to which could be helpful in the future if I want to pursue software development.
 
 > Also, did the portfolio project surface any gaps in your own knowledge of
 > software development. If so, what are those gaps and how did you address them?
 
-<!-- TODO: discuss -->
+The portfolio project made me realize that I'm not that familiar with using Git and navigating a repository. For example, I had issues getting edits on a branch that I hadn't already checked out. To address this gap I had to do some research on Git, but it seems like the best way to not have Git issues is to plan well ahead of time and not have to deal with fixing Git issues.
 
 > Finally, as a part of completing the portfolio project, to what extent has
 > your perspective of software development changed, if at all? In other words,
 > is software development something you still enjoy? If not, why not?
 
-<!-- TODO: discuss -->
+I think I enjoy software development about the same amount as before the project. Software development isn't really what I'm aiming for right now because I'm studying data analytics and would prefer a more data science related role. However, software development is somewhat enjoyable to me and could be a secondary option. Software development is fine in a class perspective but it doesn't seem as enjoyable when doing it 40 hours a week. I have heard people getting software development jobs and then dropping out quickly into their job because it isn't enjoyable which makes me question if I would want to do software development.
 
 > One of the challenges of completing the portfolio project is picking up a lot
 > of skills on your own. Some of these skills are, of course, software skills.
@@ -317,29 +313,31 @@ Take some time to fill them out honestly.
 > this process. Therefore, the first question is what skills did you pick up
 > through this process?
 
-<!-- TODO: discuss -->
+This project made me more familiar with how to use GitHub and create a repository of a personal project. I also improved my knowledge of how Java is designed and got more familiar with the different parts of a component (like interfaces and classes) and how they work together. Finally I learned how to iteratively build a project and improve it with some feedback.
 
 > The follow-up question is: could you rephrase these skills you picked up
 > as bullet points that you could put on a resume? Try it below.
 
-<!-- TODO: discuss -->
+- Used a GitHub repository to track changes and recieve feedback on the component.
+- Modeled the scorecard with an interface and class, following object-oriented design principles.
+- Improved the component through an iterative, feedback driven process with instructor guidance.
 
 > Next, how has working on this project affected your career trajectory?
 > In other words, do you now hate the topic you picked? Or, are you even more
 > interested in it? Both outcomes are valuable to your personal development.
 
-<!-- TODO: discuss -->
+I would say I have about the same amount of interest as before. I enjoyed simulating a disc golf scorecard to a certain extent and it was more fun than the work in class because it was something releavnt to me. However, it wasn't that thrilling because certain parts of the process were still mundane and awful (like testing).
 
 > Finally, consider the skills you've picked up and your current career
 > trajectory. What are some things you could do to continue on your
 > career trajectory? Also, who are some mentors you could contact to help
 > you stay on your path?
 
-<!-- TODO: discuss -->
+This project gave me familiar with GitHub and what was needed to create my own project. At one of my student employment jobs where I do data related tasks, I was able to create a practice project for myself where I displayed weather data from the weather.gov API in a Streamlit dashboard. This portfolio project made me realize what I was able to do and how to start a project. In the future I could continue doing tiny tasks for disc golf related things or other data things that interest me if I wanted to.
+
+If I was interested in doing something related to disc golf in the future, I know somebody who works for uDisc (a disc golf app) and I could ask them for advice in the future.
 
 ### Changelog
-
-<!-- TODO: update CHANGELOG then delete this comment -->
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.
@@ -374,8 +372,6 @@ like to accomplish that, you will need to make GitHub releases after each pull
 request merge (or at least tag your commits). This is not required.
 
 ### Submission
-
-<!-- TODO: read the submission instructions then delete this comment -->
 
 Assuming that your project is in a GitHub repo somewhere and your changes are on
 a proof-of-concept branch, then what we'll want you to do is create a pull
@@ -427,7 +423,4 @@ If you'd like to give feedback for this assignment (or any assignment, really),
 make use of [this survey][survey]. Your feedback helps make assignments
 better for future students.
 
-<!-- TODO: follow the link to share your feedback then delete this comment -->
-
-[markdown-to-pdf-guide]: https://therenegadecoder.com/blog/how-to-convert-markdown-to-a-pdf-3-quick-solutions/
 [survey]: https://forms.gle/dumXHo6A4Enucdkq9

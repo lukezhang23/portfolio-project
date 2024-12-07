@@ -1,3 +1,5 @@
+package components.discgolfscorecard;
+
 /**
  * {@code DiscGolfScorecardKernel} enhanced with secondary methods.
  */
@@ -17,7 +19,7 @@ public interface DiscGolfScorecard extends DiscGolfScorecardKernel {
     Hole hole(int num);
 
     /**
-     * Advances {@code this} to the next hole.
+     * Advances {@code this} to hole {@code num}.
      *
      * @param num
      *            the number of the hole to set as current hole
